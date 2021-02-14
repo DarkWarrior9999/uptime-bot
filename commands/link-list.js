@@ -31,7 +31,6 @@ const embed = new Discord.MessageEmbed()
 message.channel.send(embed)
 });
 }
-// Developed By DarkWarrior
 exports.infos = {
 name: 'link-list',
 aliases: [],
