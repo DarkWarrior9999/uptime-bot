@@ -23,7 +23,6 @@ message.channel.send(embed)
 })
 })
 }
-// Developed By DarkWarrior
 exports.infos = {
 name: 'link-sil',
 aliases: [],
