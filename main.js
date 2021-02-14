@@ -24,6 +24,23 @@ client.aliases.set(alias, props.infos.name);
 });
 });
 
+client.on('message', async message => {
+if(message.author.bot) return;
+if(message.type == 'dm') return;
+if(!message.content.startsWith(configs.bot.prefix)) return;
+const args = message.content.slice(configs.bot.prefix.length).trim().split(/ +/g);
+const command = args.shift().toLowerCase();
+let cmd;
+if (client.commands.has(command)) {
+cmd = client.commands.get(command);
+} else if (client.aliases.has(command)) {
+cmd = client.commands.get(client.aliases.get(command));
+}
+if(cmd){
+cmd.run(client, message, args)
+}
+});
+
 setInterval(() => {
 Database.find({}, function (err, link) {
 if(err) console.log(err)
