@@ -16,12 +16,12 @@ Database.find({}, function (err, link) {
 if(err) console.log(err)
 
 let filter = link.filter(k => k.userID == message.author.id)
-let list;
-if(!filter) list = `Sistemde sana ait hiç bir link bulamadım!`
+let map = filter.map(r => `[Linke Git](${r.link}) | **${moment(r.date).format('DD')} ${months[moment(r.date).format('MM')]} ${moment(r.date).format('YYYY')}**`).join('\n')
 
-let map = filter.map(r => `${r.link} | **${moment(r.date).format('DD')} ${months[moment(r.date).format('MM')]} ${moment(r.date).format('YYYY HH:mm')}**`).join('\n')
- 
-if(filter) list = `Sistemimde sana ait **${filter.length}** link bulunmakta! \n\n ${map}`
+let list;
+if(!filter) list = `Veritabanamımda sana ait link bulamadım!`
+if(filter) list = `${map}`
+if(filter.length == 0) list = `Veritabanamımda sana ait link bulamadım!`
 
 const embed = new Discord.MessageEmbed()
 .setColor('GREEN')
